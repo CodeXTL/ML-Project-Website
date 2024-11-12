@@ -5,32 +5,32 @@
 
     <!-- Begin Jekyll SEO tag v2.8.0 -->
     <title>
-      CS 4641 Malicious URL Identification and Detection
+      Cayman theme | Cayman is a clean, responsive theme for GitHub Pages.
     </title>
     <meta name="generator" content="Jekyll v4.3.4" />
-    <meta property="og:title" content="CS-4641 Malicious URL Identification and Detection" />
+    <meta property="og:title" content="Cayman theme" />
     <meta property="og:locale" content="en_US" />
     <meta
       name="description"
-      content="Project for CS4641 Group 27."
+      content="Cayman is a clean, responsive theme for GitHub Pages."
     />
     <meta
       property="og:description"
-      content="Project for CS4641 Group 27."
+      content="Cayman is a clean, responsive theme for GitHub Pages."
     />
     <link rel="canonical" href="http://0.0.0.0:4000/" />
     <meta property="og:url" content="http://0.0.0.0:4000/" />
     <meta property="og:site_name" content="Cayman theme" />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary" />
-    <meta property="twitter:title" content="CS-4641 Malicious URL Identification and Detection" />
+    <meta property="twitter:title" content="Cayman theme" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "description": "Project for CS4641 Group 27.",
-        "headline": "CS-4641 Malicious URL Identification and Detection",
-        "name": "CS-4641 Malicious URL Identification and Detection",
+        "description": "Cayman is a clean, responsive theme for GitHub Pages.",
+        "headline": "Cayman theme",
+        "name": "Cayman theme",
         "url": "http://0.0.0.0:4000/"
       }
     </script>
@@ -63,7 +63,7 @@
   <body>
     <header class="page-header" role="banner">
       <h1 class="project-name">
-        CS-4641 Malicious URL Identification and Detection
+        ML-4641 Machine Learning-Based Malicious URL Detection
       </h1>
       <h2 class="project-tagline">
         PhishGuard: Securing the web, one URL at a time.
@@ -126,10 +126,12 @@
         capabilities. Abu-Nimeh et al. [1] conducted an early comparative study
         of machine learning models, including Logistic Regression and Random
         Forests, to evaluate their performance in detecting phishing emails.
-        Ma et al. [2] expanded on this by pioneering the use of machine learning 
-        models that analyze lexical and host-based features of URLs, which 
-        outperformed traditional blacklist methods. Le at al. [3] further advanced 
-        the field by focusing on lexical patterns within domain names to detect phishing
+        This research laid the groundwork for using machine learning in phishing
+        detection. Ma et al. [2] expanded on this by pioneering the use of
+        machine learning models that analyze lexical and host-based features of
+        URLs, outperforming traditional blacklist methods by adapting to new
+        threats more effectively. Le at al. [3] further advanced the field by
+        focusing on lexical patterns within domain names to detect phishing
         sites in real-time, emphasizing efficiency without heavy reliance on
         content analysis. In this project, we aim to build on the techniques
         used in these studies, with the goal of further improving their
@@ -227,85 +229,114 @@
       <h3 id="header-3">Data Prepocessing</h3>
 
       <p>
-        Training will require traditional NLP methods: noise reduction,
+        Proprocessing requires traditional NLP methods: noise reduction,
         tokenization, stopword removal, feature extraction, and dimensionality
-        reduction.
+        reduction. At this point, we have implemented several NLP preprocessing
+        techniques:
       </p>
 
       <ul>
         <li>
-          <strong>Noise reduction: </strong>Removing punctuation: slashes ("/"),
-          which are prevalent in URLs, as well as periods (".") separating
-          domain names.
+          <strong>Tokenization:</strong> We have implemented methods to get the
+          top-level domain, the domain, any subdomains, any schemes, and any
+          subdirectories in the URL.
         </li>
         <li>
-          <strong>Tokenization: </strong>Tokenizing the URLs by identifying the
-          domains and subdomains and other important keywords in the string.
+          <strong>Feature Extraction:</strong> We have implemented methods
+          allowing us to determine the length of the URL and any subsets of the
+          URL we stated above, get the number of digits vs. letters vs. special
+          characters, and get the frequency of top-level domains.
         </li>
         <li>
-          <strong>Stopword removal: </strong>Removing strings like "www" which
-          carry little information about the URL.
-        </li>
-        <li>
-          <strong>Feature extraction: </strong>Extracting features such as the
-          frequency of keywords like "com," "https," and "edu" versus "exe" and
-          "zip". Other features include dictionary words versus random text, URL
-          length, etc.
+          <strong>Noise Reduction:</strong> We have implemented methods from
+          both the urlib and tldextract libraries to decode and unquote the
+          URLs.
         </li>
       </ul>
 
       <h3 id="header-3">ML Algorithms & Models</h3>
 
+      <p>
+        At this point, we have also implemented two models for classifying the
+        URLs:
+      </p>
+
       <ul>
         <li>
-          <strong>Linear regression: </strong>Used to create artificial features
-          from the data like likelihood of download or likelihood of
-          impersonating another site.
+          <strong>Logistic Regression:</strong> We chose to use logistic
+          regression for our first model as it is extremely powerful for binary
+          classification, and as such works well for our benign vs. malicious
+          url classification
         </li>
         <li>
-          <strong>Logistic regression: </strong>Classification, especially
-          binary classification.
-        </li>
-        <li>
-          <strong>Support vector machines (SVM): </strong>Phishing URLs come in
-          many data distinct types; an SVM model could accurately identify and
-          sort these groups.
-        </li>
-        <li>
-          <strong>Random forest: </strong>A random forest, with its repeated
-          discrete choices, may make more intelligent decisions for this problem
-          than a regression model.
+          <strong>Random Forest:</strong> We chose to use random forest as our
+          second model as its repeated discrete choices may provide more insight
+          into the classification and make more intelligent decisions throughout
+          the classification process.
         </li>
       </ul>
 
-      <h2 id="header-2">Potential Results & Discussion</h2>
-
-      <h3 id="header-3">Quantitative Metrics</h3>
+      <h2 id="header-2">Results & Discussion</h2>
 
       <p>
-        For this dataset, the main objective is classification, so we will
-        primarily be using metrics related to how well the model sorts the urls
-        by malicious intent and risk. We will use model accuracy, model
-        precision, and model recall, as well as models like the scikit det_curve
-        to compute model error. Confusion matrices will be used to evaluate
-        false negatives vs positives.
+        As this is a classification problem, our quantitative metrics all relate
+        to how well the models classify the URLs between malicious and benign.
+        From running both the random forest and logistic regression models, we
+        determined the following quantitative metrics:
       </p>
 
-      <h3 id="header-3">Project Goals</h3>
+      <ul>
+        <li>
+          <strong>Model Accuracy:</strong> 93.57% for Random Forest, 85.62% for
+          Logistic Regression
+        </li>
+        <li>
+          <strong>Model Precision:</strong> 96.41% for Random Forest, 90.93% for
+          Logistic Regression
+        </li>
+        <li>
+          <strong>Model Recall:</strong> 84.44% for Random Forest, 64.63% for
+          Logistic Regression
+        </li>
+      </ul>
 
       <p>
-        The main goal of the project is to produce a model that can accurately
-        detect phishing urls. This would allow some other service (such as an
-        email provider or IT department) to warn users about these urls before
-        they are accessed and catch the user.
+        From this, we can see that Random Forest outperformed logistic
+        regression in all three major quantitative categories. Also, from
+        looking at the confusion matrices given below, we can see that there
+        were no major discrepancies in the random forest model in
+        overclassifying malicious as benign or benign as malicious.
       </p>
 
-      <h3 id="header-3">Expected Results</h3>
+      <img src="confusion_mat0.png" width="410" />
+      <img src="confusion_mat1.png" width="410" />
 
       <p>
-        We expect to classify the given urls as either benign or phishing with
-        at least 80% accuracy. Also, the model will preferably err on the side
-        of caution and have more error in classifying benign urls as phishing.
+        Next, we looked at which parameters passed into the models were most
+        important in terms of decision-making. As we can see from the chart
+        below, the most important feature by far was the domain length at more
+        than 40% importance, followed by path length and number of directories
+        at about 15-20% importance, with the rest of the passed parameters
+        holding between 5-10% importance.
+      </p>
+
+      <img src="feature_importance.png" width="600" />
+
+      <p>
+        Lastly, we generated a ROC curve for the random forrest model. This
+        curve, seen below, gave us an Area Under the Curve (AUC) of 0.91. This
+        showed us that the model is well suited for detecting malicious URLs in
+        terms of balancing TP and FN rates.
+      </p>
+
+      <img src="random_forrest_roc.png" width="600" />
+
+      <p>
+        As you can see from the results above, we have been extremely successful
+        in making a very accurate and precise model for determining if the URLs
+        are benign or malicious. Moving forward, we would like to further
+        explore more of the models provided in the project proposal (linear
+        regression, SVM, etc.), and explore the error in each of our models.
       </p>
 
       <h2 id="header-2">Timeline</h2>
@@ -341,7 +372,7 @@
           </tr>
           <tr>
             <td style="text-align: left">Nikkola Glover</td>
-            <td style="text-align: left">Problem Definition, Video Slides, Video Recording</td>
+            <td style="text-align: left">Problem Definition</td>
           </tr>
           <tr>
             <td style="text-align: left">Oliver Lee</td>
@@ -353,6 +384,51 @@
             <td style="text-align: left">Porter Zach</td>
             <td style="text-align: left">
               Introduction and Background, Methods
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 id="header-3">Midterm Contributions</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="text-align: left">Name</th>
+            <th style="text-align: left">Proposal Contributions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="text-align: left">Caden Virant</td>
+            <td style="text-align: left">
+              Written Report and Data Preprocessing
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align: left">David Claffey</td>
+            <td style="text-align: left">
+              Random Forest Model Code and Database Exploration
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align: left">Nikkola Glover</td>
+            <td style="text-align: left">
+              Logistic Regression Model Code, Data Preprocessing Code, Data
+              Visualization (Confusion Matrices)
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align: left">Oliver Lee</td>
+            <td style="text-align: left">
+              Data Preprocessing Functions and Website Update
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align: left">Porter Zach</td>
+            <td style="text-align: left">
+              Logistic Regression and Random Forest Model Functionality and
+              Evaluation
             </td>
           </tr>
         </tbody>

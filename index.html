@@ -305,9 +305,10 @@
       </ul>
 
       <p>
-        From this, we can see that Random Forest outperformed logistic
-        regression in all three major quantitative categories. Also, from
-        looking at the confusion matrices given below, where 1 is malicious and 0 is not malicious, we can see that there
+        From this, we can see that both Random Forest and Neural Network significantly
+        outperformed logistic regression in all three major quantitative categories. There is little difference 
+        between the accuracy and precision between the Random Forest approach and the Neural Network approach; however the Random Forest approach
+        takes a slight lead due to a higher recall. Also, from looking at the confusion matrices given below, where 1 is malicious and 0 is not malicious, we can see that there
         were no major discrepancies in the random forest model in
         overclassifying malicious as benign or benign as malicious. However, the models misclassifies malicious URLs as safe at a higher rate
         than misclassifying safe URLs as malicious. Ethically, this isn't ideal and we would want our model to be more conservative.  

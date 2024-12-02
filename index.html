@@ -257,7 +257,7 @@
       <h3 id="header-3">ML Algorithms & Models</h3>
 
       <p>
-        At this point, we have also implemented two models for classifying the
+        At this point, we have also implemented three models for classifying the
         URLs:
       </p>
 
@@ -274,6 +274,10 @@
           into the classification and make more intelligent decisions throughout
           the classification process.
         </li>
+        <li>
+          <strong>Multilayer Perceptron (MLP):</strong> We chose a multilayer perceptron to test the performance of 
+          a fully-connected neural network and various layer architectures. 
+        </li>
       </ul>
 
       <h2 id="header-2">Results & Discussion</h2>
@@ -288,28 +292,44 @@
       <ul>
         <li>
           <strong>Model Accuracy:</strong> 93.57% for Random Forest, 85.62% for
-          Logistic Regression
+          Logistic Regression, 94% for Neural Network
         </li>
         <li>
           <strong>Model Precision:</strong> 96.41% for Random Forest, 90.93% for
-          Logistic Regression
+          Logistic Regression, 97% for Neural Network
         </li>
         <li>
           <strong>Model Recall:</strong> 84.44% for Random Forest, 64.63% for
-          Logistic Regression
+          Logistic Regression, 82% for Neural Network
         </li>
       </ul>
 
       <p>
         From this, we can see that Random Forest outperformed logistic
         regression in all three major quantitative categories. Also, from
-        looking at the confusion matrices given below, we can see that there
+        looking at the confusion matrices given below, where 1 is malicious and 0 is not malicious, we can see that there
         were no major discrepancies in the random forest model in
-        overclassifying malicious as benign or benign as malicious.
+        overclassifying malicious as benign or benign as malicious. However, the models misclassifies malicious URLs as safe at a higher rate
+        than misclassifying safe URLs as malicious. Ethically, this isn't ideal and we would want our model to be more conservative.  
+      </p>
+      <p>
+        We tested several neural network architectures, testing increased hidden layers and deeper layers. 
+        For the hyperparameter tuning, hidden layers of (5,3), (4,3,3), (10,6), and (64, 32) were tested using the adam gradient descent optimizer and default batch/iteration sizes. 
+        Accuracies were all around 91-93% with similar recalls and precision to RF and LR. 
+      </p>
+      <p></p>  
+        The best NN architecture was (64,32) with 
+        94% average accuracy, 91%/97% precision and 99%/82% recall for classes 0 and 1 respectively. As the model gets larger, accuracies 
+        became marginally better, however the time complexity of training and inference for the network was worse than random forest. Because the data is 
+        highly tabulated due to our data preprocessing scripts, it makes sense that a lower complexity Random Forest model could outperform the neural network. 
+
       </p>
 
       <img src="confusion_mat0.png" width="410" />
       <img src="confusion_mat1.png" width="410" />
+      <div style="text-align: center;">
+        <img src="conf_matrix_3.png" width="520" />
+      </div>
 
       <p>
         Next, we looked at which parameters passed into the models were most
@@ -323,7 +343,7 @@
       <img src="feature_importance.png" width="600" />
 
       <p>
-        Lastly, we generated a ROC curve for the random forest model. This
+        Lastly, we generated ROC curves for the random forest, logistic regression, and neural network models. The random forest
         curve, seen below, gave us an Area Under the Curve (AUC) of 0.91. This
         showed us that the model is well suited for detecting malicious URLs in
         terms of balancing TP and FN rates.
@@ -332,13 +352,21 @@
       <img src="random_forrest_roc.png" width="600" />
 
       <p>
-        As you can see from the results above, we have been extremely successful
-        in making a very accurate and precise model for determining if the URLs
-        are benign or malicious. Moving forward, we would like to further
-        explore more of the models provided in the project proposal (linear
-        regression, SVM, etc.), and explore the error in each of our models.
+        The neural network achieved an ROC area of .90, slightly worse than the random forest model.
       </p>
-
+      <img src="NN_roc_curve.png" width="650" />
+      <p>
+        Given the time complexity of the neural network for only marginal improvements on accuracy and a lower ROC area suggests logistic regression 
+        is the best model that we trained. It could be improved by performing a parameter sweep to find optimal parameters such as max tree depth and number of estimators.
+      </p>
+      <h2 id="header-2">Ethical Considerations</h2>
+      <p>
+        As aforementioned, there are ethical considerations to be had given the model is more prone to classifying safe emails as malicious rather than the 
+        opposite. This behavior could improve convenience for the user, as the model is less likely to flag safe emails. However, if users rely too heavily on 
+        model detection, and malicious emails evade detection, this could lead to data breaches, financial loss, and loss of property. In general, this model would likely improve the situation 
+        of malicious URLs at a small cost of user convenience for misclassifications, but it is important to consider how increased trust in malicious URL detection would affect 
+        users propensity to click on URLs that pass detection.
+      </p>
       <h2 id="header-2">Timeline</h2>
 
       <h3 id="header-3">Gantt Chart</h3>
@@ -429,6 +457,43 @@
             <td style="text-align: left">
               Logistic Regression and Random Forest Model Functionality and
               Evaluation
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 id="header-3">Final Contributions</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="text-align: left">Name</th>
+            <th style="text-align: left">Proposal Contributions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="text-align: left">Caden Virant</td>
+            <td style="text-align: left">Written Report and Methods</td>
+          </tr>
+          <tr>
+            <td style="text-align: left">David Claffey</td>
+            <td style="text-align: left">Written Report and Results</td>
+          </tr>
+          <tr>
+            <td style="text-align: left">Nikkolas Glover</td>
+            <td style="text-align: left">Streamlit App, Final Video</td>
+          </tr>
+          <tr>
+            <td style="text-align: left">Oliver Lee</td>
+            <td style="text-align: left">
+              Webpage, Streamlit App
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align: left">Porter Zach</td>
+            <td style="text-align: left">
+              MLP Model Code and Data Visualization
             </td>
           </tr>
         </tbody>
